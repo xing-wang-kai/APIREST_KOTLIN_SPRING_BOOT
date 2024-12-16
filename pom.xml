@@ -97,6 +97,7 @@
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>
 						<artifactId>kotlin-maven-noarg</artifactId>
+						<version>1.5.21</version>
 					</dependency>
 				</dependencies>
 			</plugin>
