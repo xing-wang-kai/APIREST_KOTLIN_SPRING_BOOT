@@ -103,6 +103,16 @@
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
+				<version>${kotlin.version}</version>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<args>
 						<arg>-Xjsr305=strict</arg>
@@ -130,25 +140,6 @@
 					</dependency>
 
 				</dependencies>
-			</plugin>
-
-			<plugin>
-				<groupId>org.jetbrains.kotlin</groupId>
-				<artifactId>kotlin-maven-allopen</artifactId>
-				<version>1.9.25</version>
-				<executions>
-					<execution>
-						<id>all-open</id>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-						<configuration>
-							<annotation>org.springframework.stereotype.Component</annotation>
-							<annotation>org.springframework.transaction.annotation.Transactional</annotation>
-							<annotation>javax.persistence.Entity</annotation>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
