@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.10</kotlin.version>
+		<version>1.9.10</version>
 	</properties>
 
 	<dependencies>
@@ -88,12 +88,11 @@
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>
 						<artifactId>kotlin-maven-allopen</artifactId>
-						<version>${kotlin.version}</version>
+						<version>1.9.10</version>
 					</dependency>
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>
 						<artifactId>kotlin-maven-noarg</artifactId>
-						<version>${kotlin.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
