@@ -1,8 +1,12 @@
 package com.orgs.orgs.models
 
-import jakarta.persistence.*
+
 import java.math.BigDecimal
 import java.util.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
 
 
 @Entity(name = "products")
