@@ -125,7 +125,7 @@
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-allopen</artifactId>
-				<version>${kotlin.version}</version>
+				<version>1.9.10</version>
 				<executions>
 					<execution>
 						<id>all-open</id>
