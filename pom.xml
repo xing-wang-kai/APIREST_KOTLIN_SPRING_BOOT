@@ -2,27 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
-		<relativePath/>
+		<version>2.4.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<groupId>com.orgs</groupId>
-	<artifactId>orgs</artifactId>
+	<groupId>com.eprogramar</groupId>
+	<artifactId>bank-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>orgs</name>
-	<description>Demo project for Spring Boot</description>
+	<name>bank-api</name>
+	<description>Bank Web API</description>
 
 	<properties>
-		<java.version>21</java.version>
-		<kotlin.version>1.9.20</kotlin.version>
+		<java.version>11</java.version>
+		<kotlin.version>1.4.10</kotlin.version>
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot Starters -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -36,12 +33,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<!-- Kotlin Dependencies -->
-		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-kotlin</artifactId>
 		</dependency>
@@ -51,37 +42,24 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-stdlib</artifactId>
+			<artifactId>kotlin-stdlib-jdk8</artifactId>
 		</dependency>
 
-		<!-- Database -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- Springdoc OpenAPI -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-kotlin</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-
-		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-test-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -90,26 +68,13 @@
 		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 		<plugins>
-			<!-- Spring Boot Maven Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
-			<!-- Kotlin Maven Plugin -->
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
-				<version>${kotlin.version}</version>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<goals>
-							<goal>compile</goal>
-							<goal>test-compile</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<args>
 						<arg>-Xjsr305=strict</arg>
@@ -119,27 +84,20 @@
 						<plugin>jpa</plugin>
 					</compilerPlugins>
 				</configuration>
-			</plugin>
-
-			<!-- Kotlin AllOpen Plugin -->
-			<plugin>
-				<groupId>org.jetbrains.kotlin</groupId>
-				<artifactId>kotlin-maven-allopen</artifactId>
-				<version>1.9.10</version>
-				<executions>
-					<execution>
-						<id>all-open</id>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-						<configuration>
-							<annotation>jakarta.persistence.Entity</annotation>
-							<annotation>jakarta.persistence.MappedSuperclass</annotation>
-							<annotation>jakarta.persistence.Embeddable</annotation>
-						</configuration>
-					</execution>
-				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jetbrains.kotlin</groupId>
+						<artifactId>kotlin-maven-allopen</artifactId>
+						<version>${kotlin.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jetbrains.kotlin</groupId>
+						<artifactId>kotlin-maven-noarg</artifactId>
+						<version>${kotlin.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
