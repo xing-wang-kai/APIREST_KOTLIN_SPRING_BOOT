@@ -131,6 +131,25 @@
 
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-maven-allopen</artifactId>
+				<version>1.9.25</version>
+				<executions>
+					<execution>
+						<id>all-open</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<annotation>org.springframework.stereotype.Component</annotation>
+							<annotation>org.springframework.transaction.annotation.Transactional</annotation>
+							<annotation>javax.persistence.Entity</annotation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
