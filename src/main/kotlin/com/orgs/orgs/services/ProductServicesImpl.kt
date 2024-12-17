@@ -2,6 +2,7 @@ package com.orgs.orgs.services
 
 import com.orgs.orgs.models.Product
 import com.orgs.orgs.repository.ProductsRepository
+import jakarta.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -9,6 +10,7 @@ import org.springframework.util.Assert
 import java.util.*
 
 @Service
+@Transactional
 class ProductServicesImpl(private val repository: ProductsRepository) : ProductServicesInterface {
     override fun create(product: Product): Product {
 
