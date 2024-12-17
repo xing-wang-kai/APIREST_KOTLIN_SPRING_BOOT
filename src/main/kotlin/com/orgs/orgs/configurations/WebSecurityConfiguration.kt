@@ -1,7 +1,9 @@
 package com.orgs.orgs.configurations
 
+import io.swagger.v3.oas.models.PathItem
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.userdetails.User
@@ -15,15 +17,20 @@ class WebSecurityConfiguration {
 
     @Bean
     fun configure(http: HttpSecurity): SecurityFilterChain {
-        http.httpBasic()
+        http.csrf().disable() // Desabilitar CSRF (se necessário)
+            .httpBasic()
             .and()
-            .authorizeRequests()
-            .anyRequest().authenticated()
+            .authorizeHttpRequests { auth ->
+                auth
+                    .requestMatchers("/public/**").permitAll() // Permite acesso sem autenticação
+                    .requestMatchers(HttpMethod.POST, "/api/**").hasRole("USER")
+                    .anyRequest().authenticated() // Todas as outras requisições exigem autenticação
+            }
         return http.build()
     }
 
     @Bean
-    fun userDetailsService(): UserDetailsService{
+    fun userDetailsService(): UserDetailsService {
         val user = User.withDefaultPasswordEncoder()
             .username("kaiwang")
             .password("123")
@@ -31,7 +38,5 @@ class WebSecurityConfiguration {
             .build()
 
         return InMemoryUserDetailsManager(user)
-
     }
-
 }
