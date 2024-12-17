@@ -36,7 +36,7 @@ class ProductServicesImpl(private val repository: ProductsRepository) : ProductS
                 description = product.description,
                 price = product.price,
                 imgUrl = product.imgUrl,
-                userId = product.userId
+                user = product.user
             )
             repository.save(productTOUpdate)
         }

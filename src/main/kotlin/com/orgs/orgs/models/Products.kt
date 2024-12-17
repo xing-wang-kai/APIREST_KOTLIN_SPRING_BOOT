@@ -12,8 +12,7 @@ data class Product(
     @Column(name="description") var description: String,
     @Column(name="price") var price: BigDecimal,
     @Column(name="img_url") var imgUrl: String? = null,
-    @Column(name="user_id") var userId: Long? = 0L
+    @ManyToOne @JoinColumn(name = "user_id") var user: User? = null
 ) {
-    // Construtor sem argumentos para o Hibernate
-    constructor() : this(0L, "", "", BigDecimal.ZERO, null, 0L)
+    constructor() : this(0L, "", "", BigDecimal.ZERO, null, null)
 }
