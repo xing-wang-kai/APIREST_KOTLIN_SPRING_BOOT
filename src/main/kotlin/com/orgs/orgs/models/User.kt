@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name="users")
-class User (
+data class User (
     @Id @GeneratedValue var id: Long,
     @Column(name="email") var email: String,
     @Column(name="name") var name: String,
