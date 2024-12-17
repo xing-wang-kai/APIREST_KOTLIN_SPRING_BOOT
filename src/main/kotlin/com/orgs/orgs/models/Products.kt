@@ -14,5 +14,5 @@ data class Product(
     @Column(name="img_url") var imgUrl: String? = null,
     @ManyToOne @JoinColumn(name = "user_id") var user: User? = null
 ) {
-    constructor() : this(0L, "", "", BigDecimal.ZERO, null, null)
+    constructor() : this(0L, "", "", BigDecimal.ZERO, null, User())
 }
