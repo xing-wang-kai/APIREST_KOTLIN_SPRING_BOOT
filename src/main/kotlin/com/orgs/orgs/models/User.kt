@@ -11,7 +11,7 @@ data class User (
     @Column(name="role") var role: String,
     @Column(name="password") var password: String,
     @OneToMany(mappedBy = "user")
-    var products: List<Product> = emptyList()
+    var products: List<Product>? = null
 ) {
-    constructor() : this(0L, "", "", "", "", emptyList())
+    constructor() : this(0L, "", "", "", "", null)
 }
