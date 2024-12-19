@@ -1,6 +1,8 @@
 package com.orgs.orgs.models
 
 import jakarta.persistence.*
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.Size
 import lombok.AllArgsConstructor
 import lombok.EqualsAndHashCode
 import lombok.NoArgsConstructor
@@ -13,9 +15,13 @@ import java.time.LocalDateTime
 @EqualsAndHashCode(of=["id"])
 data class User (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
+    @field:NotEmpty
+    @field:Size(min = 5, max = 200)
     @Column(name="email") var email: String,
     @Column(name="name") var name: String,
     @Column(name="role") var role: String,
+    @field:NotEmpty
+    @field:Size(min = 5, max = 50)
     @Column(name="password") var password: String,
     @OneToMany(mappedBy = "user")
     var products: MutableList<Product>? = mutableListOf(),

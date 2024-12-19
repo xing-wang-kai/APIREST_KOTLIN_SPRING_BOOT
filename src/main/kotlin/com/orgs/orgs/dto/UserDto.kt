@@ -2,7 +2,7 @@ package com.orgs.orgs.dao
 
 import java.time.LocalDateTime
 
-class UserDto (
+data class UserDto (
     var email: String,
     var name: String,
     var role: String,

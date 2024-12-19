@@ -1,13 +1,17 @@
 package com.orgs.orgs.dto
 
 import com.orgs.orgs.models.Product
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Size
+
 import java.math.BigDecimal
 
 data class ProductDTO(
     val id: Long,
-    val title: String,
-    val description: String,
-    val price: BigDecimal,
+    @field:NotEmpty @field:Size(min = 5, max = 100) val title: String,
+    @field:NotEmpty @field:Size(min = 5, max = 500) val description: String,
+    @field:NotNull val price: BigDecimal,
     val imgUrl: String?,
     val userId: Long?
 ){
