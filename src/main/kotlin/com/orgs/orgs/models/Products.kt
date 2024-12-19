@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor
 import lombok.EqualsAndHashCode
 import lombok.NoArgsConstructor
 import java.math.BigDecimal
+import java.time.LocalDateTime
 
 
 @Entity
@@ -18,8 +19,15 @@ data class Product(
     @Column(name="description") var description: String,
     @Column(name="price") var price: BigDecimal,
     @Column(name="img_url") var imgUrl: String? = null,
-    @ManyToOne @JoinColumn(name = "user_id") var user: User? = null
-) {
-    constructor() : this(0L, "", "", BigDecimal.ZERO, null, null)
+    @ManyToOne @JoinColumn(name = "user_id") var user: User,
 
+    @Column(name="created_at") var createdAt: LocalDateTime = LocalDateTime.now(),
+    @Column(name="updated_at") var updatedAt: LocalDateTime? = null,
+    @Column(name="deleted_at") var deletedAt: LocalDateTime? = null,
+    @Column(name="is_deleted") var isDeleted: Boolean = false,
+    @Column(name="is_sycronized") var isSycronized: Boolean = false
+){
+    override fun toString(): String {
+        return "Product(id=$id, title=$title, description=$description, price=$price, imgUrl=$imgUrl, createdAt=$createdAt, updatedAt=$updatedAt, deletedAt=$deletedAt)"
+    }
 }

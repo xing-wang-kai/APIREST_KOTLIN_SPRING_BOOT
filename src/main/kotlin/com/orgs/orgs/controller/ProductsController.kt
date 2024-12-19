@@ -1,5 +1,7 @@
 package com.orgs.orgs.controller
 
+import com.orgs.orgs.dao.ProductDao
+import com.orgs.orgs.dto.ProductDTO
 import com.orgs.orgs.models.Product
 import com.orgs.orgs.repository.ProductsRepository
 import com.orgs.orgs.services.ProductServicesImpl
@@ -21,22 +23,32 @@ class ProductsController(private val service: ProductServicesImpl) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody product: Product): Product = service.create(product)
+    fun create(@RequestBody product: ProductDTO): ProductDao = service.create(product)
 
     @GetMapping
-    fun getAll(): List<Product> = service.getAll()
+    fun getAll(): List<ProductDao> = service.getAll()
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long) : ResponseEntity<Product> =
-        service.getById(id).map {
-            ResponseEntity.ok(it)
-        }.orElse(ResponseEntity.notFound().build())
+    fun getById(@PathVariable id: Long) : ResponseEntity<ProductDao> {
+        return try {
+            val productDao = service.getById(id) // Agora retorna um ProductDao diretamente
+            ResponseEntity.ok(productDao)
+        } catch (e: NoSuchElementException) { // Trate casos onde o ID não existe
+            ResponseEntity.notFound().build()
+        }
+    }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long, @RequestBody product: Product): ResponseEntity<Product> =
-        service.update(id, product).map {
-            ResponseEntity.ok(it)
-        }.orElse(ResponseEntity.notFound().build())
+    fun update(@PathVariable id: Long, @RequestBody productDTO: ProductDTO): ResponseEntity<ProductDao> {
+        return try {
+            val updatedProductDao = service.update(id, productDTO)
+            ResponseEntity.ok(updatedProductDao)
+        } catch (e: NoSuchElementException) {
+            ResponseEntity.notFound().build()
+        } catch (e: Exception) {
+            ResponseEntity.status(500).build()
+        }
+    }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
