@@ -1,11 +1,17 @@
 package com.orgs.orgs.models
 
 import jakarta.persistence.*
+import lombok.AllArgsConstructor
+import lombok.EqualsAndHashCode
+import lombok.NoArgsConstructor
 import java.math.BigDecimal
 
 
 @Entity
 @Table(name = "products")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of=["id"])
 data class Product(
     @Id @GeneratedValue var id: Long = 0L,
     @Column(name="title") var title: String,
