@@ -2,11 +2,16 @@ package com.orgs.orgs.controller
 
 import com.orgs.orgs.dao.ProductDao
 import com.orgs.orgs.dto.ProductDTO
-import com.orgs.orgs.models.Product
-import com.orgs.orgs.repository.ProductsRepository
 import com.orgs.orgs.services.ProductServicesImpl
+import jakarta.transaction.Transactional
+import jakarta.validation.Valid
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,14 +24,20 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/products")
+@Validated
 class ProductsController(private val service: ProductServicesImpl) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody product: ProductDTO): ProductDao = service.create(product)
+    @Transactional
+    @CacheEvict(value = ["product_list"], allEntries = true)
+    fun create(@RequestBody @Valid product: ProductDTO): ProductDao = service.create(product)
 
     @GetMapping
-    fun getAll(): List<ProductDao> = service.getAll()
+    @Cacheable("product_list")
+    fun getAll(
+        @PageableDefault(size=8) pagination: Pageable
+    ): List<ProductDao> = service.getAll(pagination)
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long) : ResponseEntity<ProductDao> {
@@ -39,6 +50,8 @@ class ProductsController(private val service: ProductServicesImpl) {
     }
 
     @PutMapping("/{id}")
+    @Transactional
+    @CacheEvict(value = ["product_list"], allEntries = true)
     fun update(@PathVariable id: Long, @RequestBody productDTO: ProductDTO): ResponseEntity<ProductDao> {
         return try {
             val updatedProductDao = service.update(id, productDTO)
@@ -51,10 +64,11 @@ class ProductsController(private val service: ProductServicesImpl) {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
+    @CacheEvict(value = ["product_list"], allEntries = true)
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
         service.delete(id)
         return ResponseEntity<Void>(HttpStatus.OK)
     }
-
 
 }

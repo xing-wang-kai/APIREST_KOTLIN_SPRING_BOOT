@@ -13,5 +13,5 @@ class UserDao (
    var updatedAt: LocalDateTime? = null,
    var deletedAt: LocalDateTime? = null,
    var isDeleted: Boolean? = false,
-   var isSycronized: Boolean = false
+   var isSyncronized: Boolean = false
 )

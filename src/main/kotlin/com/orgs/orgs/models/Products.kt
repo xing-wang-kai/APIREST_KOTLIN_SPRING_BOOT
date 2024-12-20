@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 @AllArgsConstructor
 @EqualsAndHashCode(of=["id"])
 data class Product(
-    @Id @GeneratedValue var id: Long = 0L,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long = 0L,
     @Column(name="title") var title: String,
     @Column(name="description") var description: String,
     @Column(name="price") var price: BigDecimal,

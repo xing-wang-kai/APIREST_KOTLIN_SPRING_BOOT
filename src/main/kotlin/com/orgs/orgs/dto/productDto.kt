@@ -4,9 +4,16 @@ import com.orgs.orgs.models.Product
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import lombok.AllArgsConstructor
+import lombok.EqualsAndHashCode
+import lombok.NoArgsConstructor
+import org.springframework.stereotype.Component
 
 import java.math.BigDecimal
 
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of=["id"])
 data class ProductDTO(
     val id: Long,
     @field:NotEmpty @field:Size(min = 5, max = 100) val title: String,

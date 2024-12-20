@@ -15,6 +15,6 @@ fun UserDao.toUser(listOfProducts: MutableList<Product>): User {
         updatedAt = this.updatedAt,
         deletedAt = this.deletedAt,
         isDeleted = this.isDeleted,
-        isSycronized = this.isSycronized
+        isSyncronized = this.isSyncronized
     )
 }

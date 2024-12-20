@@ -15,6 +15,6 @@ fun User.toUserDao(): UserDao {
         updatedAt = this.updatedAt,
         deletedAt = this.deletedAt,
         isDeleted = this.isDeleted,
-        isSycronized = this.isSycronized
+        isSyncronized = this.isSyncronized
     )
 }

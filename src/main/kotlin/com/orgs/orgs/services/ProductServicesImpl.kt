@@ -9,6 +9,7 @@ import com.orgs.orgs.extensions.toUserDto
 import com.orgs.orgs.models.Product
 import com.orgs.orgs.repository.ProductsRepository
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.util.Assert
 import java.time.LocalDateTime
@@ -48,9 +49,9 @@ class ProductServicesImpl(
         return returnProduct
     }
 
-    override fun getAll(): List<ProductDao> {
-        var products = repository.findAll()
-        return products.map { it.toProductDao() }
+    override fun getAll(pagination:Pageable): List<ProductDao> {
+        var products = repository.findAll(pagination)
+        return products.toList().map { it.toProductDao() }
     }
 
     override fun getById(id: Long): ProductDao {

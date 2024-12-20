@@ -15,13 +15,9 @@ import java.time.LocalDateTime
 @EqualsAndHashCode(of=["id"])
 data class User (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
-    @field:NotEmpty
-    @field:Size(min = 5, max = 200)
     @Column(name="email") var email: String,
     @Column(name="name") var name: String,
     @Column(name="role") var role: String,
-    @field:NotEmpty
-    @field:Size(min = 5, max = 50)
     @Column(name="password") var password: String,
     @OneToMany(mappedBy = "user")
     var products: MutableList<Product>? = mutableListOf(),
@@ -30,7 +26,7 @@ data class User (
     @Column(name="updated_at") var updatedAt: LocalDateTime? = null,
     @Column(name="deleted_at") var deletedAt: LocalDateTime? = null,
     @Column(name="is_deleted") var isDeleted: Boolean? = false,
-    @Column(name="is_sycronized") var isSycronized: Boolean = false
+    @Column(name="is_syncronized") var isSyncronized: Boolean = false
 )
 {
     override fun toString(): String {
