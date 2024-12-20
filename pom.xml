@@ -147,6 +147,12 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.23</version> <!-- Use a versão mais recente disponível -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
