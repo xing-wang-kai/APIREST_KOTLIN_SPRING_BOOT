@@ -2,10 +2,9 @@ package com.orgs.orgs.services
 
 import com.orgs.orgs.dao.UserDao
 import com.orgs.orgs.dao.UserDto
-import com.orgs.orgs.models.User
-import java.util.*
+import org.springframework.security.core.userdetails.UserDetailsService
 
-interface UserServiceInterface {
+interface UserServiceInterface: UserDetailsService {
 
     fun create(userDto: UserDto): UserDao
 

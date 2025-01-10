@@ -17,7 +17,10 @@ class UserController(private val service: UserService) {
     fun create(@RequestBody userDto: UserDto): UserDao = service.create(userDto)
 
     @GetMapping
-    fun getAll(): List<UserDao> = service.getAll()
+    fun getAll(): List<UserDao> {
+        println("TESSSSSSSSSSSSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEE")
+        return service.getAll()
+    }
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long) : ResponseEntity<UserDao> {

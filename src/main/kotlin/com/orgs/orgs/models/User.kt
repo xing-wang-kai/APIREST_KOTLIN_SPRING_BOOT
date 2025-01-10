@@ -1,8 +1,7 @@
 package com.orgs.orgs.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotEmpty
-import jakarta.validation.constraints.Size
 import lombok.AllArgsConstructor
 import lombok.EqualsAndHashCode
 import lombok.NoArgsConstructor
@@ -17,10 +16,17 @@ data class User (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
     @Column(name="email") var email: String,
     @Column(name="name") var name: String,
-    @Column(name="role") var role: String,
+
+    @JsonIgnore
     @Column(name="password") var password: String,
     @OneToMany(mappedBy = "user")
     var products: MutableList<Product>? = mutableListOf(),
+
+    @Column(name="role")
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_role")
+    var role: List<Role> = mutableListOf(),
 
     @Column(name="created_at") var createdAt: LocalDateTime = LocalDateTime.now(),
     @Column(name="updated_at") var updatedAt: LocalDateTime? = null,
